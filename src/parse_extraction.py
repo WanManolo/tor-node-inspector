@@ -2,7 +2,6 @@
 
 file = open('./config/sample.txt')
 
-w = 0
 nodes = {}
 for line in file:
     # Skip sample breakline
@@ -13,10 +12,17 @@ for line in file:
         speed = line.split(',')[2].strip().split(')')[0]
         if ip in nodes:
             freq = nodes[ip][0] + 1
+            # Find max speed
+            if nodes[ip][2] < int(speed):
+                maxSpeed = int(speed)
+            else:
+                maxSpeed = nodes[ip][2]
         else:
             freq = 1
+            maxSpeed = int(speed)
         # get average speed based on frequency from sampling
         avgSpeed = int(speed) / freq
-        nodes[ip] = [freq, avgSpeed]
+        # Set nodes[ip] = [frequency, average Speed, max Speed]
+        nodes[ip] = [freq, avgSpeed, maxSpeed]
 
 print(nodes)
