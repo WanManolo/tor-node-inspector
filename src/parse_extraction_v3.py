@@ -1,16 +1,17 @@
 # -*- coding: utf8 -*-
 
-file = open('/home/jro/crontab_output2.txt')
+import sys
 
-w = 0
+file = open(sys.argv[1])
+
 nodes = {}
 for line in file:
     # Skip sample breakline
     if "Existing nodes" not in line:
         # Extract IP
-        ip = line.split(',')[0].strip().split('\'')[1].strip()
+        ip = line.split(':')[0].strip()
         # Extract bandwidth
-        speed = line.split(',')[2].strip().split(')')[0]
+        speed = line.split(':')[1].strip()
         if ip in nodes:
             freq = nodes[ip][0] + 1
             total = nodes[ip][3] + int(speed)
