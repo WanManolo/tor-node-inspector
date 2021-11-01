@@ -2,7 +2,6 @@
 
 file = open('/home/jro/crontab_output2.txt')
 
-w = 0
 nodes = {}
 for line in file:
     # Skip sample breakline
